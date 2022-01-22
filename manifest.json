@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Evenscroll",
+  "version": "0.1",
+
+  "description": "Scroll evenly.",
+
+  "icons": {
+    "48": "icons/48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.*.*/*"],
+      "js": ["/js/main.js"],
+      "css": ["/css/style.css"]
+    }
+  ]
+}
