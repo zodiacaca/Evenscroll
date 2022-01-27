@@ -59,10 +59,27 @@ function stopDrag() {
 }
 
 // ticks
+let currentX = 0
+function magMouseMove(e) {
+  currentX = e.clientX
+}
+document.addEventListener("mousemove", magMouseMove)
+
 function step(timestamp) {
   if (!isMDown) {
     const pos = lerp(0.5, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
     slide.style.top = pos + "px"
+  }
+  const styleLeft = parseFloat(window.getComputedStyle(slide).getPropertyValue('left'))
+  if (!isNaN(styleLeft)) {
+    if (currentX > html.clientWidth * 0.9) {
+      let left = -slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5
+      left = lerp(0.1, styleLeft, left)
+      slide.style.left = left + "px"
+    } else {
+      let left = lerp(0.2, styleLeft, 0)
+      slide.style.left = left + "px"
+    }
   }
 
   window.requestAnimationFrame(step);
