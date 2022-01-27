@@ -20,6 +20,9 @@ const slide = document.createElement("div")
 slide.setAttribute("class", "slide")
 slide.setAttribute("draggable", "true")
 rail.appendChild(slide)
+const bulge = document.createElement("div")
+bulge.setAttribute("class", "bulge")
+slide.appendChild(bulge)
 
 // drag operation
 const pos = {
