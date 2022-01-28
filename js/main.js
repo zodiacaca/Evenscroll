@@ -67,18 +67,21 @@ document.addEventListener("mousemove", magMouseMove)
 
 function step(timestamp) {
   if (!isMDown) {
-    const pos = lerp(0.5, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
+    const pos = lerp(0.25, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
     slide.style.top = pos + "px"
   }
-  const styleLeft = parseFloat(window.getComputedStyle(slide).getPropertyValue('left'))
+  const styleLeft = parseFloat(window.getComputedStyle(slide).left)
   if (!isNaN(styleLeft)) {
     if (currentX > html.clientWidth * 0.9) {
-      let left = -slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5
+      let left = currentX - (getClientOffset(rail).left + rail.offsetWidth * 0.5)
+      left = left.clamp(-slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5, slide.offsetWidth * 0.5 - bulge.offsetWidth * 0.5)
       left = lerp(0.1, styleLeft, left)
       slide.style.left = left + "px"
+      bulge.style.left = (-left + convertRemToPixel(2)) + "px"
     } else {
       let left = lerp(0.2, styleLeft, 0)
       slide.style.left = left + "px"
+      bulge.style.left = (-left + convertRemToPixel(2)) + "px"
     }
   }
 
@@ -88,4 +91,19 @@ window.requestAnimationFrame(step)
 
 function lerp(t, from, to) {
   return from + (to - from) * t
+}
+
+function convertRemToPixel(rem) {
+  return rem * parseFloat(getComputedStyle(html).fontSize)
+}
+
+function getClientOffset(elem) {
+  let top = 0, left = 0
+  while(elem) {
+      top = top + parseFloat(elem.offsetTop)
+      left = left + parseFloat(elem.offsetLeft)
+      elem = elem.offsetParent
+  }
+
+  return {top: top, left: left}
 }
