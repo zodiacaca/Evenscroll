@@ -3,9 +3,6 @@ browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   location.reload();
 });
 
-Number.prototype.clamp = function(min, max) {
-  return Math.min(Math.max(this, min), max)
-}
 
 const html = document.getElementsByTagName('html').item(0)
 const body = document.getElementsByTagName('body').item(0)
@@ -88,22 +85,3 @@ function step(timestamp) {
   window.requestAnimationFrame(step);
 }
 window.requestAnimationFrame(step)
-
-function lerp(t, from, to) {
-  return from + (to - from) * t
-}
-
-function convertRemToPixel(rem) {
-  return rem * parseFloat(getComputedStyle(html).fontSize)
-}
-
-function getClientOffset(elem) {
-  let top = 0, left = 0
-  while(elem) {
-      top = top + parseFloat(elem.offsetTop)
-      left = left + parseFloat(elem.offsetLeft)
-      elem = elem.offsetParent
-  }
-
-  return {top: top, left: left}
-}
