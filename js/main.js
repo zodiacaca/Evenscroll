@@ -42,10 +42,13 @@ function dragMouseDown(e) {
 function dragMouseMove(e) {
   e.preventDefault()
 
+  const distY = e.clientY - getClientOffset(slide).top
   const ncrmnt = e.clientY - pos.y
   const top = (slide.offsetTop + ncrmnt).clamp(0, rail.offsetHeight - slide.offsetHeight)
   slide.style.top = top + "px"
-  html.scrollTop = html.scrollTop + ncrmnt * 2.5
+  if (e.clientY >= getClientOffset(rail).top + distY && e.clientY <= getClientOffset(rail).top + rail.offsetHeight - slide.offsetHeight + distY) {
+    html.scrollTop = html.scrollTop + ncrmnt * 2.5
+  }
   pos.y = e.clientY
 }
 
