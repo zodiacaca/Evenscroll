@@ -28,5 +28,18 @@
       ],
       "css": ["/css/style.css"]
     }
-  ]
+  ],
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "permissions": ["storage"],
+
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "Evenscroll",
+    "default_icon": "icons/icon.png",
+    "default_popup": "html/popup.html"
+  }
 }
