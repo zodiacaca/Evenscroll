@@ -1,11 +1,13 @@
 
 const options = {
-  scrollMultiplier: 2.5
+  dragMultiplier: 2.5
 }
 
 function saveOptions() {
   browser.storage.local.set({
-    scrollMultiplier: document.querySelector("#scroll-multiplier").value
+    options: {
+      dragMultiplier: document.querySelector("#drag-multiplier").value
+    }
   })
 }
 

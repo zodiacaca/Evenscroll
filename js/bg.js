@@ -17,3 +17,14 @@ browser.commands.onCommand.addListener(function (command) {
     );
   }
 });
+
+
+function onError(error) {
+  console.log(`Error: ${error}`)
+}
+
+function onGot(item) {
+  console.log(item)
+}
+
+browser.storage.local.get().then(onGot, onError)
