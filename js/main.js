@@ -21,7 +21,7 @@ const bulge = document.createElement("div")
 bulge.setAttribute("class", "bulge")
 slide.appendChild(bulge)
 
-document.body.style.overflowY = 'hidden'
+// document.body.style.overflowY = 'hidden'
 
 // drag operation
 const pos = {
