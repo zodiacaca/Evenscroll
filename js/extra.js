@@ -4,8 +4,10 @@ let targetScroll = 0
 let hideScroll = false
 
 function extended() {
-  if (hideScroll) {
+  if (hideScroll || slide.matches(':hover')) {
     html.scrollTop = lerp(0.1, html.scrollTop, targetScroll)
+  } else {
+    targetScroll = html.scrollTop
   }
 }
 
@@ -20,7 +22,7 @@ slide.onwheel = (event) => {
 }
 
 body.onwheel = (event) => {
-  if (hideScroll) {
+  if (hideScroll && !slide.matches(':hover')) {
     event.preventDefault();
 
     let dir = event.deltaY > 0 ? 1 : -1
