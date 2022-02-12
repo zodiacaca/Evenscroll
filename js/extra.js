@@ -1,4 +1,5 @@
 
+// wheel
 let targetScroll = 0
 let hideScroll = false
 
@@ -39,5 +40,14 @@ slide.addEventListener('contextmenu', (event) => {
   } else {
     document.body.style.overflowY = 'hidden'
     hideScroll = true
+  }
+})
+
+// extra space
+slide.addEventListener('auxclick', function(e) {
+  if (e.button == 1) {
+    const blank = document.createElement("div")
+    blank.setAttribute("class", "blank")
+    body.appendChild(blank)
   }
 })
