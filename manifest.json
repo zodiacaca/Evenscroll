@@ -6,7 +6,7 @@
   "description": "Scroll evenly.",
 
   "icons": {
-    "48": "icons/icon.png"
+    "48": "icons/icon.svg"
   },
 
   "commands": {
@@ -40,7 +40,7 @@
   "browser_action": {
     "browser_style": true,
     "default_title": "Evenscroll",
-    "default_icon": "icons/icon.png",
+    "default_icon": "icons/icon.svg",
     "default_popup": "html/popup.html"
   }
 }
