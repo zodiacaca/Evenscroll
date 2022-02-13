@@ -4,7 +4,7 @@ let targetScroll = 0
 let hideScroll = false
 
 function extended() {
-  if (hideScroll || slide.matches(':hover')) {
+  if ((hideScroll || slide.matches(':hover')) && !isMDown) {
     html.scrollTop = lerp(0.1, html.scrollTop, targetScroll)
   } else {
     targetScroll = html.scrollTop

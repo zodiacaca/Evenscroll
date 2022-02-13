@@ -1,0 +1,56 @@
+
+.upper {
+  width: 100%;
+  height: 12rem;
+  border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+}
+
+.upper .title {
+  position: relative;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 5rem;
+  color: hsla(0, 0%, 0%, 0.6);
+  left: 25%;
+  top: 4rem;
+}
+
+.options {
+  position: relative;
+  left: 25%;
+  padding: 1.5rem 2rem;
+}
+
+.option {
+  display: block;
+}
+
+.option-tag {
+  display: inline-block;
+  font-family: Courier New;
+  font-size: 1.2rem;
+  letter-spacing: 0.125rem;
+  color: hsla(0, 0%, 50%, 1);
+  width: 15%;
+  border-right: 1px solid hsla(0, 0%, 0%, 0.1);
+}
+
+.option-control {
+  display: inline-block;
+  font-family: Helvetica;
+  font-size: 0.875rem;
+  color: hsla(0, 0%, 25%, 1);
+  padding: 0 3rem;
+}
+
+#save {
+  display: block;
+  position: relative;
+  font-size: 0.9rem;
+  color: hsla(0, 0%, 25%, 1);
+  left: 15%;
+  margin: 1.5rem -1rem;
+  width: 6.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 0.25rem;
+}
