@@ -22,24 +22,43 @@
 
 .option {
   display: block;
+  height: 2.5rem;
 }
 
 .option-tag {
   display: inline-block;
+  vertical-align:middle;
   font-family: Courier New;
   font-size: 1.2rem;
   letter-spacing: 0.125rem;
   color: hsla(0, 0%, 50%, 1);
+  margin: 0;
   width: 15%;
   border-right: 1px solid hsla(0, 0%, 0%, 0.1);
 }
 
 .option-control {
   display: inline-block;
+  vertical-align:middle;
   font-family: Helvetica;
   font-size: 0.875rem;
-  color: hsla(0, 0%, 25%, 1);
+  color: hsla(0, 0%, 50%, 1);
   padding: 0 3rem;
+}
+
+.option-gadget {
+  display: inline-block;
+  vertical-align:middle;
+  margin: 0;
+}
+
+.option-output {
+  display: inline-block;
+  vertical-align:middle;
+}
+
+.option-output::before {
+  content: ': ';
 }
 
 #save {

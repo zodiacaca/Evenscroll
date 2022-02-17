@@ -6,7 +6,7 @@ const options = {
 function saveOptions() {
   browser.storage.local.set({
     options: {
-      dragMultiplier: document.querySelector("#drag-multiplier").value * 0.1
+      dragMultiplier: document.querySelector("#drag-range").value * 0.1
     }
   })
 }
@@ -14,7 +14,7 @@ function saveOptions() {
 function getOptions() {
 
   function copyOptions(result) {
-    Object.assign(options, result)
+    Object.assign(options, result.options)
   }
 
   function onError(error) {
@@ -24,8 +24,8 @@ function getOptions() {
   browser.storage.local.get().then(copyOptions, onError)
 }
 
-document.addEventListener("load", getOptions)
+window.addEventListener('load', getOptions)
 
 document.querySelector('#save').onclick = () => {
-
+  saveOptions()
 }
