@@ -1,12 +1,14 @@
 
 const options = {
-  dragMultiplier: 2.5
+  dragMultiplier: 2.5,
+  hideScrollbar: false
 }
 
 function saveOptions() {
   browser.storage.local.set({
     options: {
-      dragMultiplier: document.querySelector("#drag-value").value
+      dragMultiplier: document.querySelector("#drag-value").value,
+      hideScrollbar: document.querySelector("#hide-check").checked
     }
   })
 }
