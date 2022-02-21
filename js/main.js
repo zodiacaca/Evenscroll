@@ -1,9 +1,37 @@
 
 browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  location.reload();
-});
+  if (message.event == "reloadPage") {
+    location.reload()
+  } else if (message.action) {
+    if (message.action.includes('hide')) {
+      document.body.style.overflowY = 'hidden'
+      hideScroll = true
+    } else {
+      document.body.style.overflowY = 'auto'
+      hideScroll = false
+    }
+  }
+})
 
+// custom
+const options = {}
 
+function onGot(result) {
+  Object.assign(options, result.options)
+
+  if (options.hideScrollbar) {
+    document.body.style.overflowY = 'hidden'
+    hideScroll = true
+  }
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`)
+}
+
+browser.storage.local.get().then(onGot, onError)
+
+// elements
 const html = document.getElementsByTagName('html').item(0)
 const body = document.getElementsByTagName('body').item(0)
 const scroll = document.createElement("div")
@@ -20,8 +48,6 @@ rail.appendChild(slide)
 const bulge = document.createElement("div")
 bulge.setAttribute("class", "bulge")
 slide.appendChild(bulge)
-
-// document.body.style.overflowY = 'hidden'
 
 // drag operation
 const pos = {
@@ -49,7 +75,7 @@ function dragMouseMove(e) {
   const top = (slide.offsetTop + ncrmnt).clamp(0, rail.offsetHeight - slide.offsetHeight)
   slide.style.top = top + "px"
   if (e.clientY >= getClientOffset(rail).top + distY && e.clientY <= getClientOffset(rail).top + rail.offsetHeight - slide.offsetHeight + distY) {
-    html.scrollTop = html.scrollTop + ncrmnt * 2.5
+    html.scrollTop = html.scrollTop + ncrmnt * options.dragMultiplier
   }
   pos.y = e.clientY
 }

@@ -20,6 +20,7 @@ function getOptions() {
 
     document.querySelector("#drag-range").value = options.dragMultiplier * 10
     document.querySelector("#drag-value").value = options.dragMultiplier
+    document.querySelector("#hide-check").checked = options.hideScrollbar
   }
 
   function onError(error) {
