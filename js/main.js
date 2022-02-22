@@ -74,9 +74,10 @@ function dragMouseMove(e) {
   const ncrmnt = e.clientY - pos.y
   const top = (slide.offsetTop + ncrmnt).clamp(0, rail.offsetHeight - slide.offsetHeight)
   slide.style.top = top + "px"
-  if (e.clientY >= getClientOffset(rail).top + distY && e.clientY <= getClientOffset(rail).top + rail.offsetHeight - slide.offsetHeight + distY) {
-    html.scrollTop = html.scrollTop + ncrmnt * options.dragMultiplier
-  }
+  // if (e.clientY > getClientOffset(rail).top + distY && e.clientY < getClientOffset(rail).top + rail.offsetHeight - slide.offsetHeight + distY) {
+    const multi = options.dragMultiplier || 2.5
+    html.scrollTop = html.scrollTop + ncrmnt * multi
+  // }
   pos.y = e.clientY
 }
 
@@ -105,11 +106,11 @@ function step(timestamp) {
       left = left.clamp(-slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5, slide.offsetWidth * 0.5 - bulge.offsetWidth * 0.5)
       left = lerp(0.1, styleLeft, left)
       slide.style.left = left + "px"
-      bulge.style.left = (-left + convertRemToPixel(2)) + "px"
+      bulge.style.left = (-left + convertEmToPixel(2)) + "px"
     } else {
       let left = lerp(0.2, styleLeft, 0)
       slide.style.left = left + "px"
-      bulge.style.left = (-left + convertRemToPixel(2)) + "px"
+      bulge.style.left = (-left + convertEmToPixel(2)) + "px"
     }
   }
 

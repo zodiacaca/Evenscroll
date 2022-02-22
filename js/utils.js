@@ -7,8 +7,8 @@ function lerp(t, from, to) {
   return from + (to - from) * t
 }
 
-function convertRemToPixel(rem) {
-  return rem * parseFloat(getComputedStyle(html).fontSize)
+function convertEmToPixel(em) {
+  return em * parseFloat(getComputedStyle(scroll).fontSize)
 }
 
 function getClientOffset(elem) {

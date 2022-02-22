@@ -5,9 +5,9 @@ function onGot(result) {
   Object.assign(settings, result.options)
 
   if (settings.hideScrollbar) {
-    document.querySelector("#option-hide").classList.add("selected")
+    document.querySelector("#hide").classList.add("selected")
   } else {
-    document.querySelector("#option-auto").classList.add("selected")
+    document.querySelector("#auto").classList.add("selected")
   }
 }
 
