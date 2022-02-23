@@ -31,7 +31,7 @@ body {
 
 .option-tag {
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
   font-family: Courier New;
   font-size: 1.2rem;
   letter-spacing: 0.125rem;
@@ -43,7 +43,7 @@ body {
 
 .option-control {
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
   font-family: Helvetica;
   font-size: 0.875rem;
   color: hsla(0, 0%, 50%, 1);
@@ -52,13 +52,13 @@ body {
 
 .option-gadget {
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
   margin: 0;
 }
 
 .option-output {
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
 .option-output::before {
