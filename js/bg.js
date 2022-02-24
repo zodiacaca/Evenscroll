@@ -1,15 +1,17 @@
 
+const b = typeof browser !== 'undefined' ? browser : chrome
+
 function reloadExtension() {
-  browser.runtime.reload();
+  b.runtime.reload();
 }
 
-browser.commands.onCommand.addListener(function (command) {
+b.commands.onCommand.addListener(function (command) {
   if (command == "double-refresh") {
     reloadExtension();
-    browser.tabs.query(
+    b.tabs.query(
       { currentWindow: true, active: true },
       function (tabArray) {
-        browser.tabs.sendMessage(
+        b.tabs.sendMessage(
           tabArray[0].id,
           { event: "reloadPage" }
         );

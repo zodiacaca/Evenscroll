@@ -1,5 +1,10 @@
 
-const settings = {}
+const b = typeof browser !== 'undefined' ? browser : chrome
+
+const settings = {
+  dragMultiplier: 2.5,
+  hideScrollbar: false
+}
 
 function onGot(result) {
   Object.assign(settings, result.options)
@@ -11,11 +16,7 @@ function onGot(result) {
   }
 }
 
-function onError(error) {
-  console.log(`Error: ${error}`)
-}
-
-browser.storage.local.get().then(onGot, onError)
+b.storage.local.get(settings, onGot)
 
 const options = document.getElementsByClassName("option")
 Array.from(options).forEach((element) => {
@@ -26,8 +27,8 @@ Array.from(options).forEach((element) => {
 
     element.classList.add("selected")
 
-    browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      browser.tabs.sendMessage(tabs[0].id, {action: element.id}, function(response) {})
+    b.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      b.tabs.sendMessage(tabs[0].id, {action: element.id}, function(response) {})
     })
   }
 })

@@ -1,5 +1,7 @@
 
-browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+const b = typeof browser !== 'undefined' ? browser : chrome
+
+b.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.event == "reloadPage") {
     location.reload()
   } else if (message.action) {
@@ -14,7 +16,10 @@ browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 })
 
 // custom
-const options = {}
+const options = {
+  dragMultiplier: 2.5,
+  hideScrollbar: false
+}
 
 function onGot(result) {
   Object.assign(options, result.options)
@@ -25,11 +30,7 @@ function onGot(result) {
   }
 }
 
-function onError(error) {
-  console.log(`Error: ${error}`)
-}
-
-browser.storage.local.get().then(onGot, onError)
+b.storage.local.get(options, onGot)
 
 // elements
 const html = document.getElementsByTagName('html').item(0)

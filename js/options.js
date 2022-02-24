@@ -1,11 +1,13 @@
 
+const b = typeof browser !== 'undefined' ? browser : chrome
+
 const options = {
   dragMultiplier: 2.5,
   hideScrollbar: false
 }
 
 function saveOptions() {
-  browser.storage.local.set({
+  b.storage.local.set({
     options: {
       dragMultiplier: document.querySelector("#drag-value").value,
       hideScrollbar: document.querySelector("#hide-check").checked
@@ -15,7 +17,7 @@ function saveOptions() {
 
 function getOptions() {
 
-  function copyOptions(result) {
+  function onGot(result) {
     Object.assign(options, result.options)
 
     document.querySelector("#drag-range").value = options.dragMultiplier * 10
@@ -23,11 +25,7 @@ function getOptions() {
     document.querySelector("#hide-check").checked = options.hideScrollbar
   }
 
-  function onError(error) {
-    console.log(`Error: ${error}`)
-  }
-
-  browser.storage.local.get().then(copyOptions, onError)
+  b.storage.local.get(options, onGot)
 }
 
 window.addEventListener('load', getOptions)
