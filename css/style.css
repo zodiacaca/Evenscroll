@@ -24,7 +24,7 @@
   top: 0;
   width: 1em;
   height: 100%;
-  background: hsla(0, 0%, 90%, 0.5);
+  background: hsla(0, 0%, 80%, 0.25);
   border-radius: 0.5em;
   z-index: 50;
 }
@@ -43,8 +43,8 @@
 }
 
 .slide:hover {
-  background-color: hsla(0, 0%, 65%, 0.25);
-  box-shadow: 0 0 0.5em 0.25em hsla(0, 0%, 65%, 0.25);
+  background-color: hsla(0, 0%, 75%, 0.25);
+  box-shadow: 0 0 0.5em 0.25em hsla(0, 0%, 75%, 0.25);
 }
 
 .bulge {
@@ -54,7 +54,7 @@
   top: 15%;
   width: 1em;
   height: 70%;
-  background: hsla(0, 0%, 80%, 1);
+  background: hsla(0, 0%, 75%, 0.45);
   border-radius: 0.5em;
   z-index: 70;
 }
