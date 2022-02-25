@@ -21,7 +21,7 @@ slide.onwheel = (event) => {
   targetScroll = html.scrollTop + step
 }
 
-body.onwheel = (event) => {
+body.addEventListener('wheel', (event) => {
   if (hideScroll && !slide.matches(':hover')) {
     event.preventDefault();
 
@@ -31,7 +31,7 @@ body.onwheel = (event) => {
 
     targetScroll = html.scrollTop + step
   }
-}
+}, {passive: false})
 
 slide.addEventListener('contextmenu', (event) => {
   event.preventDefault()
