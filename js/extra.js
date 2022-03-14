@@ -3,7 +3,23 @@
 let targetScroll = 0
 let hideScroll = false
 
-function extended() {
+let lastClick = 0
+
+function mouseDownExtended() {
+  if (Date.now() - lastClick <= 200) {
+    if (hideScroll) {
+      document.body.style.overflowY = 'auto'
+      hideScroll = false
+    } else {
+      document.body.style.overflowY = 'hidden'
+      hideScroll = true
+    }
+  }
+
+  lastClick = Date.now()
+}
+
+function stepExtended() {
   if ((hideScroll || slide.matches(':hover')) && !isMDown) {
     html.scrollTop = lerp(0.1, html.scrollTop, targetScroll)
   } else {
@@ -36,20 +52,12 @@ body.addEventListener('wheel', (event) => {
 slide.addEventListener('contextmenu', (event) => {
   event.preventDefault()
 
-  if (hideScroll) {
-    document.body.style.overflowY = 'auto'
-    hideScroll = false
-  } else {
-    document.body.style.overflowY = 'hidden'
-    hideScroll = true
-  }
+  targetScroll = 0
 })
 
 // extra space
 slide.addEventListener('auxclick', function(e) {
   if (e.button == 1) {
-    const blank = document.createElement("div")
-    blank.setAttribute("class", "blank")
-    body.appendChild(blank)
+    targetScroll = body.scrollHeight
   }
 })

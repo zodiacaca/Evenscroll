@@ -66,6 +66,8 @@ function dragMouseDown(e) {
 
   pos.y = e.clientY
   isMDown = true
+
+  mouseDownExtended()
 }
 
 function dragMouseMove(e) {
@@ -115,7 +117,7 @@ function step(timestamp) {
     }
   }
 
-  extended()
+  stepExtended()
 
   window.requestAnimationFrame(step);
 }
