@@ -7,7 +7,7 @@ function lerp(t, from, to) {
   return from + (to - from) * t
 }
 
-function convertEmToPixel(em) {
+function convertEmToPixel(scroll, em) {
   return em * parseFloat(getComputedStyle(scroll).fontSize)
 }
 

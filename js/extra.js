@@ -26,13 +26,13 @@ function mouseDownExtended() {
   lastClick = Date.now()
 }
 
-const extra = (slide) => {
+const extra = (scroll, slide) => {
 
   slide.onwheel = (event) => {
     event.preventDefault();
 
     let dir = event.deltaY > 0 ? 1 : -1
-    let step = window.innerHeight - convertEmToPixel(4.5)
+    let step = window.innerHeight - convertEmToPixel(scroll, 4.5)
     step *= dir
 
     targetScroll = html.scrollTop + step
@@ -43,7 +43,7 @@ const extra = (slide) => {
       event.preventDefault();
 
       let dir = event.deltaY > 0 ? 1 : -1
-      let step = convertEmToPixel(9)
+      let step = convertEmToPixel(scroll, 9)
       step *= dir
 
       targetScroll = html.scrollTop + step
