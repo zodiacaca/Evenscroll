@@ -113,11 +113,11 @@ const main = () => {
         left = left.clamp(-slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5, slide.offsetWidth * 0.5 - bulge.offsetWidth * 0.5)
         left = lerp(0.1, styleLeft, left)
         slide.style.left = left + "px"
-        bulge.style.left = (-left + convertEmToPixel(scroll, 2)) + "px"
+        bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
       } else {
         let left = lerp(0.2, styleLeft, 0)
         slide.style.left = left + "px"
-        bulge.style.left = (-left + convertEmToPixel(scroll, 2)) + "px"
+        bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
       }
     }
 
