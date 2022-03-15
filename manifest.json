@@ -24,8 +24,8 @@
       "matches": ["*://*/*"],
       "js": [
         "/js/utils.js",
-        "/js/main.js",
-        "/js/extra.js"
+        "/js/extra.js",
+        "/js/main.js"
       ],
       "css": ["/css/style.css"]
     }

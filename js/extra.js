@@ -1,7 +1,14 @@
 
-// wheel
 let targetScroll = 0
 let hideScroll = false
+
+function stepExtended(slide, isMDown) {
+  if ((hideScroll || slide.matches(':hover')) && !isMDown) {
+    html.scrollTop = lerp(0.1, html.scrollTop, targetScroll)
+  } else {
+    targetScroll = html.scrollTop
+  }
+}
 
 let lastClick = 0
 
@@ -19,45 +26,40 @@ function mouseDownExtended() {
   lastClick = Date.now()
 }
 
-function stepExtended() {
-  if ((hideScroll || slide.matches(':hover')) && !isMDown) {
-    html.scrollTop = lerp(0.1, html.scrollTop, targetScroll)
-  } else {
-    targetScroll = html.scrollTop
-  }
-}
+const extra = (slide) => {
 
-slide.onwheel = (event) => {
-  event.preventDefault();
-
-  let dir = event.deltaY > 0 ? 1 : -1
-  let step = window.innerHeight - convertEmToPixel(4.5)
-  step *= dir
-
-  targetScroll = html.scrollTop + step
-}
-
-body.addEventListener('wheel', (event) => {
-  if (hideScroll && !slide.matches(':hover')) {
+  slide.onwheel = (event) => {
     event.preventDefault();
 
     let dir = event.deltaY > 0 ? 1 : -1
-    let step = convertEmToPixel(9)
+    let step = window.innerHeight - convertEmToPixel(4.5)
     step *= dir
 
     targetScroll = html.scrollTop + step
   }
-}, {passive: false})
 
-slide.addEventListener('contextmenu', (event) => {
-  event.preventDefault()
+  body.addEventListener('wheel', (event) => {
+    if (hideScroll && !slide.matches(':hover')) {
+      event.preventDefault();
 
-  targetScroll = 0
-})
+      let dir = event.deltaY > 0 ? 1 : -1
+      let step = convertEmToPixel(9)
+      step *= dir
 
-// extra space
-slide.addEventListener('auxclick', function(e) {
-  if (e.button == 1) {
-    targetScroll = body.scrollHeight
-  }
-})
+      targetScroll = html.scrollTop + step
+    }
+  }, {passive: false})
+
+  slide.addEventListener('contextmenu', (event) => {
+    event.preventDefault()
+
+    targetScroll = 0
+  })
+
+  slide.addEventListener('auxclick', function(e) {
+    if (e.button == 1) {
+      targetScroll = body.scrollHeight
+    }
+  })
+
+}
