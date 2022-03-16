@@ -2,9 +2,9 @@
 let targetScroll = 0
 let hideScroll = false
 
-function stepExtended(slide, isMDown) {
+function stepExtended(smoothSpeed, slide, isMDown) {
   if ((hideScroll || slide.matches(':hover')) && !isMDown) {
-    html.scrollTop = lerp(0.1, html.scrollTop, targetScroll)
+    html.scrollTop = lerp(smoothSpeed, html.scrollTop, targetScroll)
   } else {
     targetScroll = html.scrollTop
   }

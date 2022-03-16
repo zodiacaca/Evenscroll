@@ -103,9 +103,12 @@ const main = () => {
   }
   document.addEventListener("mousemove", magMouseMove)
 
+  let lastFrame = 0
+  let smoothSpeed = 0.1
+
   function step(timestamp) {
     if (!isMDown) {
-      const pos = lerp(0.25, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
+      const pos = lerp(smoothSpeed * 2.5, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
       slide.style.top = pos + "px"
     }
     const styleLeft = parseFloat(window.getComputedStyle(slide).left)
@@ -113,17 +116,20 @@ const main = () => {
       if (currentX > html.clientWidth * 0.9) {
         let left = currentX - (getClientOffset(rail).left + rail.offsetWidth * 0.5)
         left = left.clamp(-slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5, slide.offsetWidth * 0.5 - bulge.offsetWidth * 0.5)
-        left = lerp(0.1, styleLeft, left)
+        left = lerp(smoothSpeed, styleLeft, left)
         slide.style.left = left + "px"
         bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
       } else {
-        let left = lerp(0.2, styleLeft, 0)
+        let left = lerp(smoothSpeed * 2, styleLeft, 0)
         slide.style.left = left + "px"
         bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
       }
     }
 
-    stepExtended(slide, isMDown)
+    smoothSpeed = 0.1 * Math.sqrt((timestamp - lastFrame) / 1000 * 144)
+    lastFrame = timestamp
+
+    stepExtended(smoothSpeed, slide, isMDown)
 
     window.requestAnimationFrame(step);
   }
