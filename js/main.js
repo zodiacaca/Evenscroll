@@ -19,6 +19,8 @@ b.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 const html = document.getElementsByTagName('html').item(0)
 const body = document.getElementsByTagName('body').item(0)
 
+let initialized = false
+
 const main = () => {
 
   // custom
@@ -129,8 +131,14 @@ const main = () => {
 
   extra(scroll, slide)
 
+  initialized = true
+
 }
 
-if (body.clientHeight > window.innerHeight * 3) {
-  main()
+const initEvenscroll = () => {
+  if (!initialized && body.clientHeight > window.innerHeight * 3) {
+    main()
+  }
 }
+initEvenscroll()
+new ResizeObserver(initEvenscroll).observe(body)
