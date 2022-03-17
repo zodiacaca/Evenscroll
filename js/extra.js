@@ -12,7 +12,7 @@ function stepExtended(smoothSpeed, slide, isMDown) {
 
 let lastClick = 0
 
-function mouseDownExtended() {
+function mouseDownExtended(e) {
   if (Date.now() - lastClick <= 200) {
     if (hideScroll) {
       document.body.style.overflowY = 'auto'
@@ -24,6 +24,16 @@ function mouseDownExtended() {
   }
 
   lastClick = Date.now()
+}
+
+function mouseHoldExtended(e) {
+  if (e.buttons == 2) {
+    console.log("Mouse was held down for longer than 1 second.")
+  }
+}
+
+function mouseUpExtended(id) {
+  clearTimeout(id)
 }
 
 const extra = (scroll, slide) => {

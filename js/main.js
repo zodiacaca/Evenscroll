@@ -62,6 +62,7 @@ const main = () => {
     'y': 0
   }
   let isMDown = false
+  let mouseHold
   slide.onmousedown = dragMouseDown
 
   function dragMouseDown(e) {
@@ -73,7 +74,13 @@ const main = () => {
     pos.y = e.clientY
     isMDown = true
 
-    mouseDownExtended()
+    mouseHold = setTimeout(() => {
+      if(isMDown) {
+        mouseHoldExtended(e)
+      }
+    }, 1000)
+
+    mouseDownExtended(e)
   }
 
   function dragMouseMove(e) {
@@ -94,6 +101,8 @@ const main = () => {
     isMDown = false
     document.removeEventListener("mousemove", dragMouseMove)
     document.removeEventListener("mouseup", stopDrag)
+
+    mouseUpExtended(mouseHold)
   }
 
   // ticks
