@@ -26,9 +26,10 @@ function mouseDownExtended(e) {
   lastClick = Date.now()
 }
 
-function mouseHoldExtended(e) {
+function mouseHoldExtended(e, scroll) {
   if (e.buttons == 2) {
-    console.log("Mouse was held down for longer than 1 second.")
+    scroll.remove()
+    initialized = false
   }
 }
 

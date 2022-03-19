@@ -75,9 +75,7 @@ const main = () => {
     isMDown = true
 
     mouseHold = setTimeout(() => {
-      if(isMDown) {
-        mouseHoldExtended(e)
-      }
+      mouseHoldExtended(e, scroll)
     }, 1000)
 
     mouseDownExtended(e)
@@ -140,7 +138,7 @@ const main = () => {
 
     stepExtended(smoothSpeed, slide, isMDown)
 
-    window.requestAnimationFrame(step);
+    window.requestAnimationFrame(step)
   }
   window.requestAnimationFrame(step)
 
