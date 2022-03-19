@@ -30,6 +30,11 @@ function mouseHoldExtended(e, scroll) {
   if (e.buttons == 2) {
     scroll.remove()
     initialized = false
+
+    slide.removeEventListener("wheel", slideWheelExtra)
+    body.removeEventListener("wheel", bodyWheelExtra)
+    slide.removeEventListener("contextmenu", slideRightExtra)
+    slide.removeEventListener("auxclick", slideMiddleExtra)
   }
 }
 
@@ -37,9 +42,14 @@ function mouseUpExtended(id) {
   clearTimeout(id)
 }
 
+let slideWheelExtra
+let bodyWheelExtra
+let slideRightExtra
+let slideMiddleExtra
+
 const extra = (scroll, slide) => {
 
-  slide.onwheel = (event) => {
+  slideWheelExtra = (event) => {
     event.preventDefault();
 
     let dir = event.deltaY > 0 ? 1 : -1
@@ -48,8 +58,9 @@ const extra = (scroll, slide) => {
 
     targetScroll = html.scrollTop + step
   }
+  slide.addEventListener('wheel', slideWheelExtra, {passive: false})
 
-  body.addEventListener('wheel', (event) => {
+  bodyWheelExtra = (event) => {
     if (hideScroll && !slide.matches(':hover')) {
       event.preventDefault();
 
@@ -59,18 +70,21 @@ const extra = (scroll, slide) => {
 
       targetScroll = html.scrollTop + step
     }
-  }, {passive: false})
+  }
+  body.addEventListener('wheel', bodyWheelExtra, {passive: false})
 
-  slide.addEventListener('contextmenu', (event) => {
+  slideRightExtra = (event) => {
     event.preventDefault()
 
     targetScroll = 0
-  })
+  }
+  slide.addEventListener('contextmenu', slideRightExtra)
 
-  slide.addEventListener('auxclick', function(e) {
+  slideMiddleExtra = (event) => {
     if (e.button == 1) {
       targetScroll = body.scrollHeight
     }
-  })
+  }
+  slide.addEventListener('auxclick', slideMiddleExtra)
 
 }

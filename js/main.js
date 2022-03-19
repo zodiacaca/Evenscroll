@@ -75,7 +75,7 @@ const main = () => {
     isMDown = true
 
     mouseHold = setTimeout(() => {
-      mouseHoldExtended(e, scroll)
+      mouseHoldExtended(e, scroll, slide)
     }, 1000)
 
     mouseDownExtended(e)
