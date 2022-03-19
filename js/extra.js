@@ -26,10 +26,14 @@ function mouseDownExtended(e) {
   lastClick = Date.now()
 }
 
-function mouseHoldExtended(e, scroll) {
+function mouseHoldExtended(e, scroll, slide, dragMouseDown, magMouseMove) {
   if (e.buttons == 2) {
     scroll.remove()
     initialized = false
+    resizeObserver.unobserve(body)
+
+    slide.removeEventListener("mousedown", dragMouseDown)
+    document.removeEventListener("mousemove", magMouseMove)
 
     slide.removeEventListener("wheel", slideWheelExtra)
     body.removeEventListener("wheel", bodyWheelExtra)

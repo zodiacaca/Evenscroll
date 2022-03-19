@@ -75,7 +75,7 @@ const main = () => {
     isMDown = true
 
     mouseHold = setTimeout(() => {
-      mouseHoldExtended(e, scroll, slide)
+      mouseHoldExtended(e, scroll, slide, dragMouseDown, magMouseMove)
     }, 1000)
 
     mouseDownExtended(e)
@@ -114,31 +114,33 @@ const main = () => {
   let smoothSpeed = 0.1
 
   function step(timestamp) {
-    if (!isMDown) {
-      const pos = lerp(smoothSpeed * 2.5, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
-      slide.style.top = pos + "px"
-    }
-    const styleLeft = parseFloat(window.getComputedStyle(slide).left)
-    if (!isNaN(styleLeft)) {
-      if (currentX > html.clientWidth * 0.9) {
-        let left = currentX - (getClientOffset(rail).left + rail.offsetWidth * 0.5)
-        left = left.clamp(-slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5, slide.offsetWidth * 0.5 - bulge.offsetWidth * 0.5)
-        left = lerp(smoothSpeed, styleLeft, left)
-        slide.style.left = left + "px"
-        bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
-      } else {
-        let left = lerp(smoothSpeed * 2, styleLeft, 0)
-        slide.style.left = left + "px"
-        bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
+    if (document.getElementById("evenscroll")) {
+      if (!isMDown) {
+        const pos = lerp(smoothSpeed * 2.5, slide.offsetTop, rail.offsetHeight / 2 - slide.offsetHeight / 2)
+        slide.style.top = pos + "px"
       }
+      const styleLeft = parseFloat(window.getComputedStyle(slide).left)
+      if (!isNaN(styleLeft)) {
+        if (currentX > html.clientWidth * 0.9) {
+          let left = currentX - (getClientOffset(rail).left + rail.offsetWidth * 0.5)
+          left = left.clamp(-slide.offsetWidth * 0.5 + bulge.offsetWidth * 0.5, slide.offsetWidth * 0.5 - bulge.offsetWidth * 0.5)
+          left = lerp(smoothSpeed, styleLeft, left)
+          slide.style.left = left + "px"
+          bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
+        } else {
+          let left = lerp(smoothSpeed * 2, styleLeft, 0)
+          slide.style.left = left + "px"
+          bulge.style.left = (-left + (rail.offsetWidth - bulge.offsetWidth) * 0.5) + "px"
+        }
+      }
+
+      smoothSpeed = 0.1 * Math.sqrt((timestamp - lastFrame) / 1000 * 144)
+      lastFrame = timestamp
+
+      stepExtended(smoothSpeed, slide, isMDown)
+
+      window.requestAnimationFrame(step)
     }
-
-    smoothSpeed = 0.1 * Math.sqrt((timestamp - lastFrame) / 1000 * 144)
-    lastFrame = timestamp
-
-    stepExtended(smoothSpeed, slide, isMDown)
-
-    window.requestAnimationFrame(step)
   }
   window.requestAnimationFrame(step)
 
@@ -154,4 +156,4 @@ const initEvenscroll = () => {
   }
 }
 initEvenscroll()
-new ResizeObserver(initEvenscroll).observe(body)
+const resizeObserver = new ResizeObserver(initEvenscroll).observe(body)
