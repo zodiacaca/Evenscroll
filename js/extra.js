@@ -27,7 +27,7 @@ function mouseDownExtended(e) {
 }
 
 function mouseHoldExtended(e, scroll, slide, dragMouseDown, magMouseMove) {
-  if (e.buttons == 2) {
+  if (e.buttons == 2 && slide.matches(':hover')) {
     scroll.remove()
     initialized = false
     resizeObserver.unobserve(body)
@@ -85,7 +85,7 @@ const extra = (scroll, slide) => {
   slide.addEventListener('contextmenu', slideRightExtra)
 
   slideMiddleExtra = (event) => {
-    if (e.button == 1) {
+    if (event.button == 1) {
       targetScroll = body.scrollHeight
     }
   }
